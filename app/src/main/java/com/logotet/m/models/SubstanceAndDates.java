@@ -1,0 +1,31 @@
+package com.logotet.m.models;
+
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.Relation;
+
+import java.util.List;
+
+public class SubstanceAndDates {
+    @Embedded
+    public Substance substance;
+
+    @Relation(parentColumn = "name", entityColumn = "substance_name", entity = ActiveDate.class)
+    public List<ActiveDate> dates;
+
+    public Substance getSubstance() {
+        return substance;
+    }
+
+    public void setSubstance(Substance substance) {
+        this.substance = substance;
+    }
+
+    public List<ActiveDate> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<ActiveDate> dates) {
+        this.dates = dates;
+    }
+}
