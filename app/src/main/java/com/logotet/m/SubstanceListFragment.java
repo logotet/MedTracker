@@ -63,35 +63,12 @@ public class SubstanceListFragment extends Fragment implements AddPillFragment.O
 
         Log.e("SubstanceListFragment", "ZANZIBAR");
         checkIfListEmpty(client);
-
-
-//        DUMMMY METHOD
-//       List<SubstanceAndDates> substanceAndDates = client.getAllSubstanceAndDates();
-//       substanceAndDates.size();
-//       SubstanceAndDates sad = substanceAndDates.get(0);
-//       Substance substance = sad.getSubstance();
-//       String name = substance.getName();
-//       String date = sad.getDates().get(0).toString();
-//       Toast.makeText(getContext(), name + " " , Toast.LENGTH_LONG).show();
-
-//        DUMMY METHOD 2
-//        String s = "20200523";
-//      List<ActiveDate>  activeDates = client.getDatesByValue(s);
-//               Toast.makeText(getContext(), activeDates.size() + " " , Toast.LENGTH_LONG).show();
-
-
-
-
+    
         SubstanceAdapter substanceAdapter = new SubstanceAdapter(substanceList);
         binding.recViewSubst.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recViewSubst.setAdapter(substanceAdapter);
 
-        binding.fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogFragment();
-            }
-        });
+        binding.fabAdd.setOnClickListener(v -> showDialogFragment());
     }
 
     private void checkIfListEmpty(DatabaseClient client) {

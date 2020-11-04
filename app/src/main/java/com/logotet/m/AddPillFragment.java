@@ -95,7 +95,8 @@ public class AddPillFragment extends DialogFragment implements TimePickerDialog.
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                substance.setName(s.toString());
+//                substance.setName(s.toString());
+                name = s.toString();
             }
 
             @Override
@@ -103,7 +104,7 @@ public class AddPillFragment extends DialogFragment implements TimePickerDialog.
 
             }
         });
-
+//        binding.radioMedication.setChecked(true);
         binding.radioGroupCategories.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -181,8 +182,8 @@ public class AddPillFragment extends DialogFragment implements TimePickerDialog.
     }
 
     private void setSubstance() {
-//        substance.setName(name);
-//        substance.setCategory(binding.spinnerCategory.getSelectedItem().toString());
+        substance.setName(name);
+        substance.setCategory(binding.spinnerCategory.getSelectedItem().toString());
         substance.setCategory(radioButton.getText().toString());
         substance.setDescription(binding.edtDescription.getText().toString());
         substance.setIntakeForm(binding.spinnerDosageType.getSelectedItem().toString());
