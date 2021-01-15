@@ -1,4 +1,4 @@
-package com.logotet.m.timeutils;
+package com.logotet.m.ui.timefragments;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

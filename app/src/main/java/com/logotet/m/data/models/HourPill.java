@@ -1,7 +1,4 @@
-package com.logotet.m.models;
-
-import java.util.Calendar;
-import java.util.List;
+package com.logotet.m.data.models;
 
 public class HourPill {
     String name;

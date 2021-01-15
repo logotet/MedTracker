@@ -1,7 +1,6 @@
-package com.logotet.m.models;
+package com.logotet.m.data.models;
 
 import androidx.room.Embedded;
-import androidx.room.Entity;
 import androidx.room.Relation;
 
 import java.util.List;

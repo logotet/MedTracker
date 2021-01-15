@@ -1,4 +1,4 @@
-package com.logotet.m;
+package com.logotet.m.ui;
 
 import android.os.Bundle;
 
@@ -7,22 +7,22 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.logotet.m.R;
 import com.logotet.m.adapters.DateAgendaAdapter;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.FragmentDayViewBinding;
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.HourPill;
-import com.logotet.m.models.PillEvent;
-import com.logotet.m.models.DateAgendaModel;
-import com.logotet.m.models.Substance;
-import com.logotet.m.models.SubstanceAndDates;
+import com.logotet.m.data.models.ActiveDate;
+import com.logotet.m.data.models.HourPill;
+import com.logotet.m.data.models.PillEvent;
+import com.logotet.m.data.models.DateAgendaModel;
+import com.logotet.m.data.models.Substance;
 import com.logotet.m.utils.DateUtils;
 import com.logotet.m.utils.Utils;
 
@@ -30,7 +30,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -126,7 +125,11 @@ public class DayViewFragment extends Fragment {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         AddPillFragment fragment = new AddPillFragment();
         fragment.setTargetFragment(DayViewFragment.this, 300);
-        fragment.show(fm, "fragment_add_pill");
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+//        fragment.show(fm, "fragment_add_pill");
     }
 
     public void updateData(Substance substance) {

@@ -1,4 +1,4 @@
-package com.logotet.m;
+package com.logotet.m.ui;
 
 public class SubstanceCategory {
 

@@ -1,11 +1,8 @@
-package com.logotet.m.models;
+package com.logotet.m.data.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import java.time.LocalDate;
 
 
 @Entity(tableName = "substance_dates")

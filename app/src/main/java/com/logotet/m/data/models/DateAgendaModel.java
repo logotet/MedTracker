@@ -1,9 +1,7 @@
-package com.logotet.m.models;
+package com.logotet.m.data.models;
 
 import androidx.annotation.NonNull;
 
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.SubstanceDetailsFragment;
-import com.logotet.m.models.Substance;
+import com.logotet.m.ui.SubstanceDetailsFragment;
+import com.logotet.m.data.models.Substance;
 
 import java.util.List;
 

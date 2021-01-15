@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.models.HourPill;
+import com.logotet.m.data.models.HourPill;
 
 import java.util.List;
 

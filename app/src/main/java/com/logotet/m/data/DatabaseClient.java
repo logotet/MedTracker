@@ -7,9 +7,9 @@ import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.Substance;
-import com.logotet.m.models.SubstanceAndDates;
+import com.logotet.m.data.models.ActiveDate;
+import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.models.SubstanceAndDates;
 
 import java.util.Collections;
 import java.util.List;

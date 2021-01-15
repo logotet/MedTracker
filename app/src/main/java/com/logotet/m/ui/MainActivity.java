@@ -1,4 +1,4 @@
-package com.logotet.m;
+package com.logotet.m.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.logotet.m.R;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.ActivityMainBinding;
 import com.logotet.m.utils.Navigation;
@@ -132,13 +133,23 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-
-
     private void showDialogFragment() {
         FragmentManager fm = getSupportFragmentManager();
         AddPillFragment fragment = new AddPillFragment();
-        fragment.show(fm, "fragment_add_pill");
+//        fragment.setTargetFragment(this, 300);
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+//        fragment.show(fm, "fragment_add_pill");
     }
+
+//
+//    private void showDialogFragment() {
+//        FragmentManager fm = getSupportFragmentManager();
+//        AddPillFragment fragment = new AddPillFragment();
+////        fragment.show(fm, "fragment_add_pill");
+//    }
 
 //    @Override
 //    public void onPillCreated(Substance substance) {

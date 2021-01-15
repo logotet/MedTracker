@@ -2,26 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="#FFF">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="M">
-            <androidx.appcompat.widget.ActionMenuView
-                android:id="@+id/amv_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:id="@+id/txtName"
@@ -33,7 +22,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/toolbar_dialog" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/edtName"
@@ -287,21 +276,6 @@
             app:layout_constraintStart_toEndOf="@id/txtEnd"
             app:layout_constraintTop_toBottomOf="@id/txtStart" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="cancel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtEnd" />
-
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ok"
-            app:layout_constraintBaseline_toBaselineOf="@id/btn_cancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtEnd" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

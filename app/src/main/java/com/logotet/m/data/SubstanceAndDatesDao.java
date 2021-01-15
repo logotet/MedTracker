@@ -4,8 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.logotet.m.models.Substance;
-import com.logotet.m.models.SubstanceAndDates;
+import com.logotet.m.data.models.SubstanceAndDates;
 
 import java.util.List;
 

@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.HourPill;
-import com.logotet.m.models.DateAgendaModel;
+import com.logotet.m.data.models.HourPill;
+import com.logotet.m.data.models.DateAgendaModel;
 
 import java.util.ArrayList;
 import java.util.List;

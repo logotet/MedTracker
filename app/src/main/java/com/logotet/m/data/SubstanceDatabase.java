@@ -3,9 +3,8 @@ package com.logotet.m.data;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.Substance;
-import com.logotet.m.models.SubstanceAndDates;
+import com.logotet.m.data.models.ActiveDate;
+import com.logotet.m.data.models.Substance;
 
 @Database(entities = {Substance.class, ActiveDate.class, }, version = 5, exportSchema = false )
 public abstract class SubstanceDatabase extends RoomDatabase {

@@ -1,6 +1,5 @@
-package com.logotet.m;
+package com.logotet.m.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,27 +8,21 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
+import com.logotet.m.R;
 import com.logotet.m.adapters.SubstanceAdapter;
-import com.logotet.m.adapters.WrapContentLinearLayoutManager;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.FragmentSubstanceListBinding;
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.Substance;
-import com.logotet.m.models.SubstanceAndDates;
+import com.logotet.m.data.models.Substance;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -94,10 +87,21 @@ public class SubstanceListFragment extends Fragment implements AddPillFragment.O
         binding.recViewSubst.scrollToPosition(0);
     }
 
+//    private void showDialogFragment() {
+//        FragmentManager fm = getActivity().getSupportFragmentManager();
+//        AddPillFragment fragment = new AddPillFragment();
+//        fragment.setTargetFragment(SubstanceListFragment.this, 300);
+////        fragment.show(fm, "fragment_add_pill");
+//    }
+
     private void showDialogFragment() {
         FragmentManager fm = getActivity().getSupportFragmentManager();
         AddPillFragment fragment = new AddPillFragment();
         fragment.setTargetFragment(SubstanceListFragment.this, 300);
-        fragment.show(fm, "fragment_add_pill");
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+//        fragment.show(fm, "fragment_add_pill");
     }
 }

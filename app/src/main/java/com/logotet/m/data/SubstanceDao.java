@@ -5,9 +5,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.logotet.m.models.Substance;
+import com.logotet.m.data.models.Substance;
 
-import java.util.Calendar;
 import java.util.List;
 
 @Dao

@@ -1,4 +1,4 @@
-package com.logotet.m.models;
+package com.logotet.m.data.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

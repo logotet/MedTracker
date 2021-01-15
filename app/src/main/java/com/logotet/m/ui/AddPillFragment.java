@@ -1,9 +1,7 @@
-package com.logotet.m;
+package com.logotet.m.ui;
 
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,14 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -31,12 +31,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.logotet.m.R;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.FragmentAddPillBinding;
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.Substance;
-import com.logotet.m.timeutils.DateDialogFragment;
-import com.logotet.m.timeutils.TimeDialogFragment;
+import com.logotet.m.data.models.ActiveDate;
+import com.logotet.m.data.models.Substance;
+import com.logotet.m.ui.timefragments.DateDialogFragment;
+import com.logotet.m.ui.timefragments.TimeDialogFragment;
 import com.logotet.m.utils.AppConstants;
 import com.logotet.m.utils.DateUtils;
 
@@ -48,7 +49,7 @@ import java.time.format.FormatStyle;
 import java.util.List;
 
 
-public class AddPillFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class AddPillFragment extends Fragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     private FragmentAddPillBinding binding;
     private Substance substance = new Substance();
@@ -69,17 +70,18 @@ public class AddPillFragment extends DialogFragment implements TimePickerDialog.
 //        super.onResume();
 //    }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_DayNight_DialogWhenLarge);
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_DayNight_DialogWhenLarge);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_pill, container, false);
         binding = DataBindingUtil.bind(view);
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -161,24 +163,32 @@ public class AddPillFragment extends DialogFragment implements TimePickerDialog.
             }
         });
 
-        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDialog().dismiss();
-            }
-        });
 
-        binding.btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
+
+
+     @Override
+     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+         inflater.inflate(R.menu.ok_cancel_menu, menu);
+         super.onCreateOptionsMenu(menu, inflater);
+
+     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_ok:
                 setSubstance();
                 databaseClient.insertSubstance(substance);
                 OnPillCreatedListener listener = (OnPillCreatedListener) getTargetFragment();
                 listener.onPillCreated(substance);
-                getDialog().dismiss();
-            }
-        });
-
+                getFragmentManager().popBackStack();
+                break;
+            case R.id.menu_cancel:
+                getFragmentManager().popBackStack();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setSubstance() {

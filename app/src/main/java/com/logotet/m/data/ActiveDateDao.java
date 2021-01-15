@@ -5,8 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.logotet.m.models.ActiveDate;
-import com.logotet.m.models.Substance;
+import com.logotet.m.data.models.ActiveDate;
 
 import java.util.List;
 

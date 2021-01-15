@@ -1,37 +1,26 @@
-package com.logotet.m;
+package com.logotet.m.ui;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
-import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
-import com.applandeo.materialcalendarview.utils.CalendarProperties;
-import com.applandeo.materialcalendarview.utils.SelectedDay;
+import com.logotet.m.R;
 import com.logotet.m.data.DatabaseClient;
+import com.logotet.m.data.models.PillEvent;
+import com.logotet.m.data.models.Substance;
 import com.logotet.m.databinding.FragmentMonthViewBinding;
-import com.logotet.m.models.PillEvent;
-import com.logotet.m.models.Substance;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
