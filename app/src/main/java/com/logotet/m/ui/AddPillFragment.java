@@ -89,7 +89,7 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.edtName.addTextChangedListener(new TextWatcher() {
+        binding.edtNameInner.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -121,7 +121,7 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
         setSpinner(R.array.medication_category, binding.spinnerCategory, AppConstants.PROMPT_CATEGORY);
         setSpinner(R.array.times_to_take, binding.spinnerIntake, AppConstants.PROMPT_INTAKE);
         setSpinner(R.array.times_per_day, binding.spinnerTimesPerDay, AppConstants.PROMPT_INTAKE_DAILY);
-        setSpinner(R.array.dosage_per_take, binding.spinnerDosage, AppConstants.PROMPT_INTAKE_DOSAGE);
+//        setSpinner(R.array.dosage_per_take, binding.spinnerDosage, AppConstants.PROMPT_INTAKE_DOSAGE);
         setSpinner(R.array.dosage_type, binding.spinnerDosageType, AppConstants.PROMPT_FORM);
 
         binding.spinnerTimesPerDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -199,11 +199,11 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
         substance.setName(name);
         substance.setCategory(binding.spinnerCategory.getSelectedItem().toString());
         substance.setCategory(radioButton.getText().toString());
-        substance.setDescription(binding.edtDescription.getText().toString());
+        substance.setDescription(binding.edtDescriptionInner.getText().toString());
         substance.setIntakeForm(binding.spinnerDosageType.getSelectedItem().toString());
         substance.setIntakeDays(binding.spinnerIntake.getSelectedItemPosition() + 1);
         substance.setIntakeDaily(binding.spinnerTimesPerDay.getSelectedItemPosition() + 1);
-        substance.setDosagePerTake(Integer.parseInt(binding.spinnerDosage.getSelectedItem().toString()) + 1);
+//        substance.setDosagePerTake(Integer.parseInt(binding.spinnerDosage.getSelectedItem().toString()) + 1);
 
     }
 
