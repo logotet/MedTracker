@@ -92,27 +92,31 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
         binding.edtName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                substance.setName(s.toString());
                 name = s.toString();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
-//        binding.radioMedication.setChecked(true);
-        binding.radioGroupCategories.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton = view.findViewById(checkedId);
-            }
-        });
+////        binding.radioMedication.setChecked(true);
+//        binding.radioGroupCategories.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                radioButton = view.findViewById(checkedId);
+//            }
+//        });
+//
+//        binding.radioGroupCategories2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                radioButton = view.findViewById(checkedId);
+//            }
+//        });
 
         setSpinner(R.array.medication_category, binding.spinnerCategory, AppConstants.PROMPT_CATEGORY);
         setSpinner(R.array.times_to_take, binding.spinnerIntake, AppConstants.PROMPT_INTAKE);
