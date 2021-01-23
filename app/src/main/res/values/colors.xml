@@ -10,5 +10,6 @@
     <color name="green">#388E3C</color>
     <color name="yellow">#FFEB3B</color>
     <color name="black">#000</color>
+    <color name="grey">#d3d3d3</color>
 
 </resources>

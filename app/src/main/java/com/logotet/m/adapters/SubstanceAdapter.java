@@ -1,41 +1,47 @@
 package com.logotet.m.adapters;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.ui.SubstanceDetailsFragment;
 import com.logotet.m.data.models.Substance;
 
 import java.util.List;
 
 public class SubstanceAdapter extends RecyclerView.Adapter<SubstanceAdapter.SubstanceHolder> {
 
-    List<Substance> substanceList;
+    private List<Substance> substanceList;
+    private SubstanceHolder.OnActionListener listener;
 
-    public SubstanceAdapter(List<Substance> list) {
+    public SubstanceAdapter(List<Substance> list, SubstanceHolder.OnActionListener listener) {
         substanceList = list;
+        this.listener = listener;
     }
 
+    public void updateData(List<Substance> substances) {
+        substanceList = substances;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
     public SubstanceHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.substance_view, parent, false);
-        return new SubstanceHolder(view);
+        return new SubstanceHolder(view, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubstanceHolder holder, int position) {
         Substance substance;
-        substance =  substanceList.get(position);
+        substance = substanceList.get(position);
         holder.txtSubstName.setText(substance.getName());
+        holder.setSubstance(substance);
     }
 
     @Override
@@ -43,20 +49,41 @@ public class SubstanceAdapter extends RecyclerView.Adapter<SubstanceAdapter.Subs
         return substanceList.size();
     }
 
-    public class SubstanceHolder extends RecyclerView.ViewHolder {
+    public static class SubstanceHolder extends RecyclerView.ViewHolder {
 
-        TextView txtSubstName;
+        private TextView txtSubstName;
+        private TextView txtOpen;
+        private ImageView imgEdit;
+        private Substance substance;
 
-        public SubstanceHolder(@NonNull final View itemView) {
+        public SubstanceHolder(@NonNull final View itemView, OnActionListener listener) {
             super(itemView);
             txtSubstName = itemView.findViewById(R.id.txtName);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(itemView.getContext(), SubstanceDetailsFragment.class);
-                    }
-            });
-
+            txtOpen = itemView.findViewById(R.id.txt_details);
+            imgEdit = itemView.findViewById(R.id.img_delete);
+            itemView.setOnClickListener(v -> toggleVisibility());
+            txtOpen.setOnClickListener(v -> listener.onOpenClicked(substance));
+            imgEdit.setOnClickListener(v -> listener.onDeleteClicked(substance));
         }
+
+        private void toggleVisibility() {
+            if (txtOpen.getVisibility() == View.GONE && imgEdit.getVisibility() == View.GONE) {
+                txtOpen.setVisibility(View.VISIBLE);
+                imgEdit.setVisibility(View.VISIBLE);
+            } else {
+                txtOpen.setVisibility(View.GONE);
+                imgEdit.setVisibility(View.GONE);
+            }
+        }
+
+        public void setSubstance(Substance substance) {
+            this.substance = substance;
+        }
+
+        public interface OnActionListener {
+            void onDeleteClicked(Substance substance);
+            void onOpenClicked(Substance substance);
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-package com.logotet.m.ui;
+package com.logotet.m.ui.calendar;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.data.models.PillEvent;
 import com.logotet.m.data.models.Substance;
 import com.logotet.m.databinding.FragmentMonthViewBinding;
+import com.logotet.m.ui.calendar.DayViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,19 +47,16 @@ public class MonthViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dbc = DatabaseClient.getInstance(getContext());
 
-        binding.calendarView.setOnDayClickListener(new OnDayClickListener() {
-            @Override
-            public void onDayClick(EventDay eventDay) {
-                if (eventDay != null) {
-                    if (eventDay instanceof PillEvent) {
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        DayViewFragment fragment;
-                        fragment = DayViewFragment.newInstance((PillEvent) eventDay);
-                        transaction.replace(R.id.fragment_container, fragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                    }
 
+        binding.calendarView.setOnDayClickListener(eventDay -> {
+            if (eventDay != null) {
+                if (eventDay instanceof PillEvent) {
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    DayViewFragment fragment;
+                    fragment = DayViewFragment.newInstance((PillEvent) eventDay);
+                    transaction.replace(R.id.fragment_container, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 }
             }
         });
@@ -100,7 +98,7 @@ public class MonthViewFragment extends Fragment {
         try {
             onCalendarEventCreatedListener = (OnCalendarEventCreatedListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement onViewSelected");
+//            throw new ClassCastException(context.toString() + " must implement onViewSelected");
         }
     }
 

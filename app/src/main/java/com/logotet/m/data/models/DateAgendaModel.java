@@ -12,6 +12,12 @@ public class DateAgendaModel {
     int year;
     List<HourPill> hourPills = new ArrayList<>();
 
+    public DateAgendaModel(int date) {
+        this.date = date;
+    }
+
+    public DateAgendaModel() {
+    }
 
     public int getMonth() {
         return month;
@@ -29,22 +35,11 @@ public class DateAgendaModel {
         this.year = year;
     }
 
-
     public List<HourPill> getHourPills() {
         return hourPills;
     }
 
-    public void setHourPills(List<HourPill> hourPills) {
-        this.hourPills = hourPills;
-
-    }
-
-    public DateAgendaModel() {
-    }
-
-    public DateAgendaModel(int date) {
-        this.date = date;
-    }
+    public void setHourPills(List<HourPill> hourPills) { this.hourPills = hourPills; }
 
     public int getDate() {
         return date;
@@ -60,22 +55,6 @@ public class DateAgendaModel {
 
     public void setWeekDay(String weekDay) {
         this.weekDay = weekDay;
-    }
-
-    public List<HourPill> initDummyHours() {
-
-        HourPill hourPill;
-        hourPill = new HourPill("Aspirin");
-        hourPills.add(hourPill);
-        hourPill = new HourPill("Benalgin");
-        hourPills.add(hourPill);
-        hourPill = new HourPill("Parazetamol");
-        hourPills.add(hourPill);
-        hourPill = new HourPill("Aspirin");
-        hourPills.add(hourPill);
-        hourPill = new HourPill("Collagen");
-        hourPills.add(hourPill);
-        return hourPills;
     }
 
     @NonNull

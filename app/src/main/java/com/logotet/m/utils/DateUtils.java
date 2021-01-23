@@ -9,12 +9,14 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
 import androidx.core.content.ContextCompat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,8 +26,9 @@ import java.util.List;
 public final class DateUtils {
 
     /*
-    Navigation method to create drawable containing text
+    ViewManager method to create drawable containing text
      */
+//    TODO: move this method.
     public static Drawable getDrawableText(Context context, String text, Typeface typeface, int color, int size) {
         Resources resources = context.getResources();
         Bitmap bitmap = Bitmap.createBitmap(48, 48, Bitmap.Config.ARGB_8888);
@@ -50,51 +53,51 @@ public final class DateUtils {
     }
 
 
-
     /**
      * This method returns a list of calendar objects between two dates
-     * @param list List representing a range of dates
+     *
+     * @param list     List representing a range of dates
      * @param position int representing every active date in a range of dates
      * @return List of only active dates
      */
     public static List<LocalDate> getActiveDates(List<LocalDate> list, int position) {
         List<LocalDate> newList = new ArrayList<>();
-        for (int j = 0; j<list.size(); j++) {
+        for (int j = 0; j < list.size(); j++) {
             LocalDate item = list.get(j);
-            if(j % position == 0){
+            if (j % position == 0) {
                 newList.add(item);
             }
             j++;
         }
-        return  newList;
+        return newList;
     }
 
-    public static  String getNamOfMonth(int monthValue){
-         return   AppConstants.MONTHS_SHORT.get(monthValue);
+    public static String getNamOfMonth(int monthValue) {
+        return AppConstants.MONTHS_SHORT.get(monthValue);
     }
 
     public static List<String> getYear(int yearValue) {
         int finalDay;
-        if(Year.isLeap(yearValue)){
+        if (Year.isLeap(yearValue)) {
             finalDay = 366;
-        }else{
+        } else {
             finalDay = 365;
         }
         List<String> year = new ArrayList<>();
-        for (int j = 1; j<=finalDay; j++) {
+        for (int j = 1; j <= finalDay; j++) {
             LocalDate date = LocalDate.ofYearDay(yearValue, j);
             String dateFormat = date.format(DateTimeFormatter.BASIC_ISO_DATE);
             year.add(dateFormat);
         }
-        return  year;
+        return year;
     }
 
 
-    private static LocalDate fromCalendarToLocalDate(Calendar calendar){
+    private static LocalDate fromCalendarToLocalDate(Calendar calendar) {
         return LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate();
     }
 
-    public static String getDateAsString(LocalDate date){
+    public static String getDateAsString(LocalDate date) {
         return date.format(DateTimeFormatter.BASIC_ISO_DATE);
     }
 
@@ -109,6 +112,19 @@ public final class DateUtils {
         return dates;
     }
 
-    private DateUtils() {
+    public static String timeToString(int i) {
+        return i < 10 ? "0" + i : i + "";
     }
+
+    public static String getCurrentDay() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(localDateTime);
+    }
+
+    public static LocalDate dateOfString(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+        return LocalDate.parse(date, formatter);
+    }
+
+
 }

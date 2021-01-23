@@ -1,5 +1,6 @@
 package com.logotet.m.data;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,15 +15,6 @@ public interface SubstanceDao {
     @Insert
     void insertSubstance(Substance substance);
 
-    @Query("SELECT * FROM substance_table")
-    List<Substance> getAll();
-
-    @Query("SELECT * FROM substance_table WHERE name LIKE :substanceName")
-    List<Substance> getSubstancesByName(String substanceName);
-
-    @Query("SELECT * FROM substance_table WHERE name LIKE :substanceName")
-    Substance getSubstanceByName(String substanceName);
-
 //    @Query("SELECT * FROM substance_table WHERE start_date LIKE :startDate")
 //    List<Substance> getSubstanceByStartDate(Calendar startDate);
 
@@ -31,4 +23,15 @@ public interface SubstanceDao {
 
     @Delete
     void deleteAll(Substance...substances);
+
+//    LiveData
+
+    @Query("SELECT * FROM substance_table")
+    LiveData<List<Substance>> getAll();
+
+    @Query("SELECT * FROM substance_table WHERE type LIKE :category")
+    LiveData<List<Substance>> getSubstancesByCategory(String category);
+
+    @Query("SELECT * FROM substance_table WHERE name LIKE :substanceName")
+    LiveData<Substance> getSubstanceByName(String substanceName);
 }

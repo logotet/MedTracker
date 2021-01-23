@@ -8,12 +8,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.logotet.m.R;
@@ -21,18 +24,21 @@ import com.logotet.m.adapters.SubstanceAdapter;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.FragmentSubstanceListBinding;
 import com.logotet.m.data.models.Substance;
+import com.logotet.m.ui.viewmodels.SubstanceListFragmentViewModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
-public class SubstanceListFragment extends Fragment implements AddPillFragment.OnPillCreatedListener {
+public class SubstanceListFragment extends Fragment implements AddPillFragment.OnPillCreatedListener, SubstanceAdapter.SubstanceHolder.OnActionListener {
 
-    FragmentSubstanceListBinding binding;
-    Substance substance;
+    private FragmentSubstanceListBinding binding;
     private List<Substance> substanceList = new ArrayList<>();
-    DatabaseClient client = DatabaseClient.getInstance(getContext());
-
+    private DatabaseClient client = DatabaseClient.getInstance(getContext());
+    private ScreenNavigator screenNavigator;
+    private SubstanceListFragmentViewModel viewModel;
 
 
     @Override
@@ -54,22 +60,32 @@ public class SubstanceListFragment extends Fragment implements AddPillFragment.O
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.e("SubstanceListFragment", "ZANZIBAR");
-        checkIfListEmpty(client);
-    
-        SubstanceAdapter substanceAdapter = new SubstanceAdapter(substanceList);
+        viewModel = new ViewModelProvider(this).get(SubstanceListFragmentViewModel.class);
+
+        SubstanceAdapter substanceAdapter = new SubstanceAdapter(substanceList, this);
         binding.recViewSubst.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recViewSubst.setAdapter(substanceAdapter);
 
-        binding.fabAdd.setOnClickListener(v -> showDialogFragment());
+        viewModel.getAllSubstances().observe(getViewLifecycleOwner(), new Observer<List<Substance>>() {
+            @Override
+            public void onChanged(List<Substance> substances) {
+                Collections.reverse(substances);
+                substanceAdapter.updateData(substances);
+                checkIfListEmpty(substances);
+            }
+        });
+
+        screenNavigator = new ScreenNavigator();
+
+        binding.fabAdd.setOnClickListener(v -> screenNavigator.openAddFragment(
+                getActivity().getSupportFragmentManager(), SubstanceListFragment.this, null));
     }
 
-    private void checkIfListEmpty(DatabaseClient client) {
-        if(client.getAllSubstances().size() > 0) {
-            substanceList = client.getAllSubstances();
+    private void checkIfListEmpty(List<Substance> substances) {
+        if (substances.size() > 0) {
             binding.recViewSubst.setVisibility(View.VISIBLE);
             binding.txtAddPills.setVisibility(View.GONE);
-        }else {
+        } else {
             binding.recViewSubst.setVisibility(View.GONE);
             binding.txtAddPills.setVisibility(View.VISIBLE);
         }
@@ -79,29 +95,24 @@ public class SubstanceListFragment extends Fragment implements AddPillFragment.O
     @Override
     public void onPillCreated(Substance substance) {
         substanceList.add(0, substance);
-//        checkIfListEmpty(client);
-//TODO: Put the visibillty stuff in an if statement
         binding.recViewSubst.setVisibility(View.VISIBLE);
         binding.txtAddPills.setVisibility(View.GONE);
         binding.recViewSubst.getAdapter().notifyItemInserted(0);
         binding.recViewSubst.scrollToPosition(0);
+
+//        Dummy data
+        Toast.makeText(getContext(), substance.toString(), Toast.LENGTH_LONG).show();
     }
 
-//    private void showDialogFragment() {
-//        FragmentManager fm = getActivity().getSupportFragmentManager();
-//        AddPillFragment fragment = new AddPillFragment();
-//        fragment.setTargetFragment(SubstanceListFragment.this, 300);
-////        fragment.show(fm, "fragment_add_pill");
-//    }
 
-    private void showDialogFragment() {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        AddPillFragment fragment = new AddPillFragment();
-        fragment.setTargetFragment(SubstanceListFragment.this, 300);
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-//        fragment.show(fm, "fragment_add_pill");
+    @Override
+    public void onDeleteClicked(Substance substance) {
+        viewModel.deleteSubstance(substance.getName());
+    }
+
+    @Override
+    public void onOpenClicked(Substance substance) {
+        screenNavigator.openDetailsFragment(
+                getActivity().getSupportFragmentManager(), SubstanceListFragment.this, substance.getName());
     }
 }

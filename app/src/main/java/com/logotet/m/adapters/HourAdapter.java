@@ -1,15 +1,20 @@
 package com.logotet.m.adapters;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
 import com.logotet.m.data.models.HourPill;
+import com.logotet.m.utils.AppConstants;
 
 import java.util.List;
 
@@ -35,9 +40,10 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourHolder> {
         HourPill hourPill;
         hourPill = hourPills.get(position);
         holder.txtPillName.setText(hourPill.getName());
-//        holder.pillTypeColor.setBackgroundColor(hourPill.getColor());
-        holder.pillTypeColor.setBackgroundResource(hourPill.getColor());
+        holder.txtHourTake.setText(hourPill.getTime());
+        holder.categoryColor.setBackgroundResource(hourPill.getColor());
         holder.setHourPillItem(hourPill);
+
     }
 
     @Override
@@ -48,27 +54,41 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourHolder> {
     public static class HourHolder extends RecyclerView.ViewHolder {
 
         HourPill hourPillItem;
-        TextView pillTypeColor, txtPillName, txtHourTake;
+        TextView categoryColor, txtPillName, txtHourTake;
+        CheckBox checkBox;
 
         public HourHolder(@NonNull View itemView, final OnHourClickedListener listener) {
             super(itemView);
             txtPillName = itemView.findViewById(R.id.txt_pill_name_hour);
-            pillTypeColor = itemView.findViewById(R.id.color_substance);
+            categoryColor = itemView.findViewById(R.id.color_substance);
             txtHourTake = itemView.findViewById(R.id.txt_hour_take);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            checkBox = itemView.findViewById(R.id.check_box);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View v) {
-                    listener.onHourClicked(hourPillItem);
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked) {
+                        txtPillName.setEnabled(false);
+                        txtHourTake.setEnabled(false);
+                        categoryColor.setBackgroundResource(AppConstants.COLOR_GREY);
+                        txtPillName.setPaintFlags(txtPillName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    }else {
+                        txtPillName.setEnabled(true);
+                        txtHourTake.setEnabled(true);
+                        categoryColor.setBackgroundResource(hourPillItem.getColor());
+                        txtPillName.setPaintFlags(txtPillName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                    }
                 }
             });
+            itemView.setOnClickListener(v -> listener.onHourClicked(hourPillItem));
         }
 
-        public void setHourPillItem(HourPill hourPillItem){
+        public void setHourPillItem(HourPill hourPillItem) {
             this.hourPillItem = hourPillItem;
         }
 
-        public interface OnHourClickedListener{
+        public interface OnHourClickedListener {
             void onHourClicked(HourPill hourPillItem);
+            void onCheckClicked(TextView view);
         }
     }
 }

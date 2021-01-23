@@ -3,6 +3,7 @@ package com.logotet.m.data;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -11,18 +12,21 @@ import com.logotet.m.data.models.ActiveDate;
 import com.logotet.m.data.models.Substance;
 import com.logotet.m.data.models.SubstanceAndDates;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class DatabaseClient {
 
     private static DatabaseClient client;
     private static SubstanceDatabase db;
 
+    private Executor executor;
+
     private DatabaseClient(Context context) {
         db = Room.databaseBuilder(context, SubstanceDatabase.class, "substance-database.db")
-                //TODO: make the methods below asynchornous to remove them from the main thread
-                .addMigrations(new Migration(4, 5) {
+                //TODO: make the methods below asynchronous to remove them from the main thread
+                .addMigrations(new Migration(5, 6) {
                     @Override
                     public void migrate(@NonNull SupportSQLiteDatabase database) {
 
@@ -40,31 +44,32 @@ public class DatabaseClient {
     }
 
     public void insertSubstance(Substance substance) {
+//        executor = Executors.newSingleThreadExecutor();
+//        executor.execute(() -> db.substanceDao().insertSubstance(substance));
         db.substanceDao().insertSubstance(substance);
-
     }
 
-    public List<Substance> getSubstancesBuName(String name) {
-        return db.substanceDao().getSubstancesByName(name);
+    public LiveData<List<Substance>> getSubstancesByCategory(String name) {
+        return db.substanceDao().getSubstancesByCategory(name);
     }
 
-    public Substance getSubstanceByName(String name) {
+    public LiveData<Substance> getSubstanceByName(String name) {
         return db.substanceDao().getSubstanceByName(name);
     }
 
+    public LiveData<List<Substance>> getAllSubstances() {
+        return  db.substanceDao().getAll();
+
+    }
+
     public void deleteAll() {
-        db.clearAllTables();
+        executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> db.clearAllTables());
     }
 
     public void deleteSubstance(String name) {
-        db.substanceDao().deleteByName(name);
-    }
-
-
-    public List<Substance> getAllSubstances() {
-       List<Substance> s = db.substanceDao().getAll();
-       Collections.reverse(s);
-        return s;
+        executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> db.substanceDao().deleteByName(name));
     }
 
     public void insertActiveDate(ActiveDate activeDate) {
@@ -90,5 +95,7 @@ public class DatabaseClient {
     public List<SubstanceAndDates> getAllSubstanceAndDates(){
         return db.substanceAndDatesDao().getAllSubstanceWithDates();
     }
+
+//    LiveData
 
 }

@@ -1,4 +1,4 @@
-package com.logotet.m.ui.timefragments;
+package com.logotet.m.ui.dialogfragments;
 
 
 import android.app.DatePickerDialog;

@@ -22,7 +22,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.logotet.m.R;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.ActivityMainBinding;
-import com.logotet.m.utils.Navigation;
+import com.logotet.m.ui.calendar.DayViewFragment;
+import com.logotet.m.ui.calendar.MonthViewFragment;
+import com.logotet.m.utils.AppConstants;
+import com.logotet.m.utils.ViewManager;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         client = DatabaseClient.getInstance(this);
-        Navigation.setUpBtmNavView(binding.bottomNav);
+        ViewManager.setUpBtmNavView(binding.bottomNav);
         setSupportActionBar(binding.toolbar);
         setUpBottomNavigation();
         openFragment(new SubstanceListFragment());
@@ -69,6 +72,18 @@ public class MainActivity extends AppCompatActivity  {
                         break;
                     case R.id.nav_send:
                         Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.nav_pill:
+                        openFragment(SubstanceCategoryFragment.newInstance(AppConstants.MEDICATION));
+                        break;
+                    case R.id.nav_supplement:
+                        openFragment(SubstanceCategoryFragment.newInstance(AppConstants.SUPPLEMENT));
+                        break;
+                    case R.id.nav_food:
+                        openFragment(SubstanceCategoryFragment.newInstance(AppConstants.FOOD));
+                        break;
+                    case R.id.nav_other:
+                        openFragment(SubstanceCategoryFragment.newInstance(AppConstants.OTHER));
                         break;
                 }
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
@@ -141,20 +156,7 @@ public class MainActivity extends AppCompatActivity  {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
-//        fragment.show(fm, "fragment_add_pill");
     }
 
-//
-//    private void showDialogFragment() {
-//        FragmentManager fm = getSupportFragmentManager();
-//        AddPillFragment fragment = new AddPillFragment();
-////        fragment.show(fm, "fragment_add_pill");
-//    }
 
-//    @Override
-//    public void onPillCreated(Substance substance) {
-////        String data = substance.getName();
-////        Toast.makeText(this, data, Toast.LENGTH_LONG).show();
-////        substanceListFragment.updateSubstance(substance);
-//    }
 }

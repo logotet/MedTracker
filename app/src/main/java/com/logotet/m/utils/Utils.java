@@ -4,7 +4,7 @@ import com.logotet.m.R;
 
 public class Utils {
     public static int getColor(String type){
-        int color = R.color.colorAccent;
+        int color = 0;
         switch (type){
             case AppConstants.MEDICATION:
                 color = AppConstants.COLOR_MEDICATION;

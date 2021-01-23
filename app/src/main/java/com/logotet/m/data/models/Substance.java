@@ -1,10 +1,14 @@
 package com.logotet.m.data.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.logotet.m.utils.DateUtils;
+
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,10 +36,11 @@ public class Substance {
     @ColumnInfo(name = "end_date")
     String endDate;
     @Ignore
-    List<Calendar> activeDates;
+    List<LocalDate> activeDates;
 
     public Substance() {
     }
+
 
 
     public int getUid() {
@@ -123,21 +128,29 @@ public class Substance {
         this.description = description;
     }
 
-//    public List<Calendar> getActiveDates(Substance s) {
-//        // TODO: This method seems too complex. Try to simplify it by redesinging the database and adding some conversion methods.
-//        Calendar startDate = Calendar.getInstance();
-//        startDate.setTime(new Date(s.getStartDate()));
-//        Calendar endDate = Calendar.getInstance();
-//        endDate.setTime(new Date(s.getEndDate()));
-//        activeDates = DateUtils.getDatesRange(startDate, endDate);
-//        activeDates = DateUtils.getActiveDates(activeDates, s.getIntakeDays());
-//        return activeDates;
-//    }
-
-    public void setActiveDates(List<Calendar> activeDates) {
-        this.activeDates = activeDates;
+    public List<LocalDate> getActiveDates() {
+        return activeDates;
     }
 
+//    public void setActiveDates(List<LocalDate> activeDates) {
+//        DateUtils.getActiveDates()
+//    }
 
+    @Override
+    public String toString() {
+        return "Substance{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", intakeDays=" + intakeDays +
+                ", intakeDaily=" + intakeDaily +
+                ", dosagePerTake=" + dosagePerTake +
+                ", intakeForm='" + intakeForm + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", activeDates=" + activeDates +
+                '}';
+    }
 }
 

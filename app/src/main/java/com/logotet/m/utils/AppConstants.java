@@ -28,6 +28,8 @@ public class AppConstants {
     public static final int COLOR_SUPPLEMENT = R.color.blue;
     public static final int COLOR_FOOD = R.color.green;
     public static final int COLOR_OTHER = R.color.yellow;
+    public static final int COLOR_GREY = R.color.grey;
+
 
     public static final int EVERYDAY = 1;
     public static final int EVERY_TWO_DAYS = 2;
@@ -39,5 +41,6 @@ public class AppConstants {
     public static final String PROMPT_INTAKE_DAILY = "How many times per day you will take it?";
     public static final String PROMPT_INTAKE_DOSAGE = "Choose dosage";
     public static final String PROMPT_FORM = "Choose form";
+
 
 }

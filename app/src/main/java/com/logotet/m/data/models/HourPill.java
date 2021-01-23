@@ -1,10 +1,11 @@
 package com.logotet.m.data.models;
 
 public class HourPill {
-    String name;
-    String time;
-    int color;
-    int date;
+    private String name;
+    private String time;
+    private int color;
+    private int date;
+    private boolean isTaken = false;
 
     public HourPill() {
     }
@@ -45,6 +46,12 @@ public class HourPill {
         this.date = date;
     }
 
+    public boolean isTaken() {
+        return isTaken;
+    }
 
+    public void setTaken(boolean taken) {
+        isTaken = taken;
+    }
 }
 
