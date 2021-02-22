@@ -41,8 +41,6 @@ public class Substance {
     public Substance() {
     }
 
-
-
     public int getUid() {
         return uid;
     }

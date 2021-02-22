@@ -50,17 +50,12 @@ public class DataModelBuilder {
             for (int j = 0; j < activeDates.size(); j++) {
                 activeDate = activeDates.get(j);
                 if (activeDate.getDate().equals(dateAgenda)) {
-                    List<String> hours = activeDate.getHours();
-                    for (String h :
-                            hours) {
                         HourPill hourPill = new HourPill(activeDate.getSubstanceName());
                         hourPill.setColor(activeDate.getColor());
-                        hourPill.setTime(h);
+                        hourPill.setTime(activeDate.getHour());
                         hourPill.setColor(activeDate.getColor());
                         pillsForDay.add(hourPill);
                     }
-
-                }
             }
             dateAgendaModel.setHourPills(pillsForDay);
             datesList.add(dateAgendaModel);

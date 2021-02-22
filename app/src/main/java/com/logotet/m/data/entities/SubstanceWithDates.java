@@ -5,7 +5,7 @@ import androidx.room.Relation;
 
 import java.util.List;
 
-public class SubstanceAndDates {
+public class SubstanceWithDates {
     @Embedded
     public Substance substance;
 

@@ -16,13 +16,12 @@ public class ActiveDate {
     private String substanceName;
     @ColumnInfo(name = "active_date")
     private String date;
-    @ColumnInfo(name = "active_hours")
-    private List<String> hours;
+    @ColumnInfo(name = "active_hour")
+    private String hour;
     @ColumnInfo(name = "color")
     private int color;
 
     public ActiveDate() {
-
     }
 
     public String getSubstanceName() {
@@ -57,11 +56,11 @@ public class ActiveDate {
         this.color = color;
     }
 
-    public List<String> getHours() {
-        return hours;
+    public String getHour() {
+        return hour;
     }
 
-    public void setHours(List<String> hours) {
-        this.hours = hours;
+    public void setHour(String hour) {
+        this.hour = hour;
     }
 }
