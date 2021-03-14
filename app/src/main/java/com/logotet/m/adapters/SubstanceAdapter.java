@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.Substance;
+import com.logotet.m.utils.Utils;
 
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class SubstanceAdapter extends RecyclerView.Adapter<SubstanceAdapter.Subs
         Substance substance;
         substance = substanceList.get(position);
         holder.txtSubstName.setText(substance.getName());
+        holder.txtCategory.setText(substance.getCategory());
+        holder.txtIntakePeriods.setText(Utils.getCategory(substance.getIntakeDays()));
         holder.setSubstance(substance);
     }
 
@@ -53,12 +56,16 @@ public class SubstanceAdapter extends RecyclerView.Adapter<SubstanceAdapter.Subs
 
         private TextView txtSubstName;
         private TextView txtOpen;
+        private TextView txtCategory;
+        private TextView txtIntakePeriods;
         private ImageView imgEdit;
         private Substance substance;
 
         public SubstanceHolder(@NonNull final View itemView, OnActionListener listener) {
             super(itemView);
             txtSubstName = itemView.findViewById(R.id.txtName);
+            txtCategory = itemView.findViewById(R.id.txt_category);
+            txtIntakePeriods = itemView.findViewById(R.id.txt_intake_period);
             txtOpen = itemView.findViewById(R.id.txt_details);
             imgEdit = itemView.findViewById(R.id.img_delete);
             itemView.setOnClickListener(v -> toggleVisibility());

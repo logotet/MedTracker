@@ -28,8 +28,8 @@ import android.widget.TimePicker;
 import com.logotet.m.R;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.FragmentAddPillBinding;
-import com.logotet.m.data.models.ActiveDate;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.ActiveDate;
+import com.logotet.m.data.entities.Substance;
 import com.logotet.m.utils.AppConstants;
 import com.logotet.m.utils.DateUtils;
 import com.logotet.m.utils.Utils;
@@ -52,18 +52,22 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
     private String name = "";
     private int dosagePerTake = 1;
     private ActiveDate activeDate;
+    private List<ActiveDate> activeDateList = new ArrayList<>();
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean isStartDateButton;
     private boolean isEndDateButton;
-    private RadioButton radioButton;
     private ScreenNavigator screenNavigator;
     private ViewManager viewManager;
     private Context context;
     private List<String> hours = new ArrayList<>();
-    private TextView pressedTimeView;
     private String substanceName;
+
+    private RadioButton radioButton;
+    private TextView pressedTimeView;
     private TextView[] hourViews;
+
+
 
     public static AddPillFragment newInstance(String name) {
         AddPillFragment fragment = new AddPillFragment();
@@ -162,6 +166,7 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
                     setActiveDates();
 //                    databaseClient.insertActiveDate(activeDate);
                     databaseClient.insertSubstance(substance);
+                    databaseClient.insertActiveDates(activeDateList.stream().toArray(ActiveDate[]::new));
                     OnPillCreatedListener listener = (OnPillCreatedListener) getTargetFragment();
                     listener.onPillCreated(substance);
                     getParentFragmentManager().popBackStack();
@@ -206,15 +211,20 @@ public class AddPillFragment extends Fragment implements TimePickerDialog.OnTime
             endDate = DateUtils.dateOfString(DateUtils.getCurrentDay());
         }
         List<String> dates = DateUtils.getDatesBetweenStartAndEnd(startDate, endDate);
-        activeDate = new ActiveDate();
+
         hours = viewManager.getListOfHours(hourViews);
         for (String dateValue : dates) {
-                activeDate.setSubstanceName(substance.getName());
-                activeDate.setDate(dateValue);
-                activeDate.setHours(hours);
-                int color = Utils.getColor(substance.getCategory());
-                activeDate.setColor(color);
-                databaseClient.insertActiveDate(activeDate);
+            activeDate = new ActiveDate();
+            activeDate.setSubstanceName(substance.getName());
+            int color = Utils.getColor(substance.getCategory());
+            activeDate.setColor(color);
+            activeDate.setDate(dateValue);
+            for (String hour :
+                    hours) {
+                activeDate.setHour(hour);
+                activeDateList.add(activeDate);
+//                databaseClient.insertActiveDate(activeDate);
+            }
             }
     }
 

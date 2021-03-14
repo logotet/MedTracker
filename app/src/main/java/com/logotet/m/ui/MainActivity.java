@@ -27,6 +27,9 @@ import com.logotet.m.ui.calendar.MonthViewFragment;
 import com.logotet.m.utils.AppConstants;
 import com.logotet.m.utils.ViewManager;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity  {
 
     ActivityMainBinding binding;

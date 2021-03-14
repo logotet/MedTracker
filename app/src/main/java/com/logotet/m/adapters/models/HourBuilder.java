@@ -1,4 +1,4 @@
-package com.logotet.m.data.models;
+package com.logotet.m.adapters.models;
 
 public class HourBuilder {
 

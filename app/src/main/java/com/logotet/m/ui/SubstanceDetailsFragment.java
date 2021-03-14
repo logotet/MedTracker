@@ -13,8 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.logotet.m.R;
-import com.logotet.m.data.DatabaseClient;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.Substance;
 import com.logotet.m.databinding.FragmentSubstanceDetailsBinding;
 import com.logotet.m.ui.viewmodels.SubstanceDetailsFragmentViewModel;
 

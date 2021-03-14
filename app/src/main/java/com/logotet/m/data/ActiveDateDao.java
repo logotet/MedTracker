@@ -6,7 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.logotet.m.data.models.ActiveDate;
+import com.logotet.m.data.entities.ActiveDate;
 
 import java.util.List;
 
@@ -14,7 +14,10 @@ import java.util.List;
 public interface ActiveDateDao {
 
     @Insert
-    void insertSubstance(ActiveDate activeDate);
+    void insertActiveDate(ActiveDate activeDate);
+
+    @Insert
+    void insertListOfActiveDate(ActiveDate...activeDates);
 
     @Query("SELECT * FROM substance_dates")
     List<ActiveDate> getAllDates();
@@ -24,6 +27,9 @@ public interface ActiveDateDao {
 
     @Query("SELECT * FROM substance_dates WHERE active_date LIKE :date")
     List<ActiveDate> getDatesByDate(String date);
+
+    @Query("SELECT * FROM substance_dates WHERE active_hour LIKE :hour")
+    List<ActiveDate> getDatesByHour(String hour);
 
     @Query("DELETE FROM substance_dates WHERE substance_name = :substanceName")
     void deleteDatesBySubstanceName(String substanceName);
@@ -42,4 +48,7 @@ public interface ActiveDateDao {
 
     @Query("SELECT * FROM substance_dates WHERE active_date LIKE :date")
     LiveData<List<ActiveDate>> getDatesByDateLive(String date);
+
+    @Query("SELECT * FROM substance_dates WHERE active_hour LIKE :hour")
+    LiveData<List<ActiveDate>> getDatesByHourLive(String hour);
 }

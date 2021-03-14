@@ -1,4 +1,4 @@
-package com.logotet.m.data;
+package com.logotet.m.data.converters;
 
 import androidx.room.TypeConverter;
 

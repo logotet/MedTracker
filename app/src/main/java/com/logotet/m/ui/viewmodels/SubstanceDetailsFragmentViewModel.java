@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.logotet.m.data.DatabaseClient;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.Substance;
 
 public class SubstanceDetailsFragmentViewModel extends AndroidViewModel {
     private DatabaseClient databaseClient;

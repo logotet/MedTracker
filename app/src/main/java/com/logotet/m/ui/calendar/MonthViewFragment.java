@@ -13,13 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.applandeo.materialcalendarview.EventDay;
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.logotet.m.R;
 import com.logotet.m.data.DatabaseClient;
-import com.logotet.m.data.models.PillEvent;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.Substance;
 import com.logotet.m.databinding.FragmentMonthViewBinding;
-import com.logotet.m.ui.calendar.DayViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,7 @@ public class MonthViewFragment extends Fragment {
 
     FragmentMonthViewBinding binding;
     List<EventDay> eventDaysList = new ArrayList<>();
-    PillEvent eventDay;
+//    PillEvent eventDay;
     OnCalendarEventCreatedListener onCalendarEventCreatedListener;
     DatabaseClient dbc;
 
@@ -48,18 +45,18 @@ public class MonthViewFragment extends Fragment {
         dbc = DatabaseClient.getInstance(getContext());
 
 
-        binding.calendarView.setOnDayClickListener(eventDay -> {
-            if (eventDay != null) {
-                if (eventDay instanceof PillEvent) {
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    DayViewFragment fragment;
-                    fragment = DayViewFragment.newInstance((PillEvent) eventDay);
-                    transaction.replace(R.id.fragment_container, fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
-            }
-        });
+//        binding.calendarView.setOnDayClickListener(eventDay -> {
+//            if (eventDay != null) {
+//                if (eventDay instanceof PillEvent) {
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    DayViewFragment fragment;
+//                    fragment = DayViewFragment.newInstance((PillEvent) eventDay);
+//                    transaction.replace(R.id.fragment_container, fragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//                }
+//            }
+//        });
 
 
 

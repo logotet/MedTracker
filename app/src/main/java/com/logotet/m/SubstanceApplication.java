@@ -1,4 +1,9 @@
 package com.logotet.m;
 
-public class SubstanceAplication {
+import android.app.Application;
+
+import dagger.hilt.android.HiltAndroidApp;
+
+@HiltAndroidApp
+public class SubstanceApplication extends Application {
 }

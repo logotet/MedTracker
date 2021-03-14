@@ -1,11 +1,9 @@
-package com.logotet.m.data.models;
+package com.logotet.m.data.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import java.util.List;
 
 
 @Entity(tableName = "substance_dates")
@@ -20,6 +18,8 @@ public class ActiveDate {
     private String hour;
     @ColumnInfo(name = "color")
     private int color;
+    @Ignore
+    private boolean taken;
 
     public ActiveDate() {
     }
@@ -62,5 +62,13 @@ public class ActiveDate {
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
 }

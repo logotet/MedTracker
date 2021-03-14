@@ -1,15 +1,11 @@
-package com.logotet.m.data.models;
+package com.logotet.m.data.entities;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.logotet.m.utils.DateUtils;
-
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 @Entity(tableName = "substance_table")

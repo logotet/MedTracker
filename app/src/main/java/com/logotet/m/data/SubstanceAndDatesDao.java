@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.logotet.m.data.models.SubstanceAndDates;
+import com.logotet.m.data.entities.SubstanceWithDates;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public interface SubstanceAndDatesDao {
     @Transaction
     @Query("SELECT * FROM substance_table WHERE name = :name")
-    SubstanceAndDates getSubstanceWithDates(String name);
+    SubstanceWithDates getSubstanceWithDates(String name);
 
     @Transaction
     @Query("SELECT * FROM substance_table")
-    List<SubstanceAndDates> getAllSubstanceWithDates();
+    List<SubstanceWithDates> getAllSubstanceWithDates();
 }

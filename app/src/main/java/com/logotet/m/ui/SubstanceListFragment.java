@@ -6,13 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,30 +20,27 @@ import com.logotet.m.R;
 import com.logotet.m.adapters.SubstanceAdapter;
 import com.logotet.m.data.DatabaseClient;
 import com.logotet.m.databinding.FragmentSubstanceListBinding;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.Substance;
 import com.logotet.m.ui.viewmodels.SubstanceListFragmentViewModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class SubstanceListFragment extends Fragment implements AddPillFragment.OnPillCreatedListener, SubstanceAdapter.SubstanceHolder.OnActionListener {
 
     private FragmentSubstanceListBinding binding;
     private List<Substance> substanceList = new ArrayList<>();
-    private DatabaseClient client = DatabaseClient.getInstance(getContext());
+    @Inject
+    DatabaseClient client;
     private ScreenNavigator screenNavigator;
     private SubstanceListFragmentViewModel viewModel;
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -1,9 +1,8 @@
-package com.logotet.m.data.models;
+package com.logotet.m.data.entities;
 
-import androidx.lifecycle.Observer;
-
+import com.logotet.m.adapters.models.DateAgendaModel;
+import com.logotet.m.adapters.models.HourPill;
 import com.logotet.m.utils.DateUtils;
-import com.logotet.m.utils.Utils;
 
 import java.time.LocalDate;
 import java.time.Year;

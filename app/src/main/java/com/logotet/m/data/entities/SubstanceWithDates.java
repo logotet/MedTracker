@@ -1,4 +1,4 @@
-package com.logotet.m.data.models;
+package com.logotet.m.data.entities;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;

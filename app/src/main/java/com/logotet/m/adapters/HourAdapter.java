@@ -7,13 +7,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.data.models.HourPill;
+import com.logotet.m.adapters.models.HourPill;
 import com.logotet.m.utils.AppConstants;
 
 import java.util.List;
@@ -43,7 +42,6 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourHolder> {
         holder.txtHourTake.setText(hourPill.getTime());
         holder.categoryColor.setBackgroundResource(hourPill.getColor());
         holder.setHourPillItem(hourPill);
-
     }
 
     @Override

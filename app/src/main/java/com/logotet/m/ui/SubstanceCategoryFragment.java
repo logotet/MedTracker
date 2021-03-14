@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -16,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.logotet.m.R;
 import com.logotet.m.adapters.SubstanceAdapter;
-import com.logotet.m.data.models.Substance;
+import com.logotet.m.data.entities.Substance;
 import com.logotet.m.databinding.FragmentSubstanceCategoryBinding;
 import com.logotet.m.ui.viewmodels.SubstanceCategoryFragmentViewModel;
 

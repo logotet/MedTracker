@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.logotet.m.R;
-import com.logotet.m.data.models.DateAgendaModel;
-import com.logotet.m.data.models.HourPill;
+import com.logotet.m.adapters.models.DateAgendaModel;
+import com.logotet.m.adapters.models.HourPill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,12 @@ public class DateAgendaAdapter extends RecyclerView.Adapter<DateAgendaAdapter.Si
     public DateAgendaAdapter(List<DateAgendaModel> dates, HourAdapter.HourHolder.OnHourClickedListener listener) {
         this.dates = dates;
         onHourClickedListener = listener;
+    }
+
+    public void updateDate(List<DateAgendaModel> dates){
+        this.dates.clear();
+        this.dates = dates;
+        notifyDataSetChanged();
     }
 
     @NonNull

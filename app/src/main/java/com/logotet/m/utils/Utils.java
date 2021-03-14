@@ -21,4 +21,23 @@ public class Utils {
         }
         return color;
     }
+
+    public static String getCategory(int value){
+        String category = "";
+        switch (value){
+            case 1:
+                category = AppConstants.EVERYDAY;
+                break;
+            case 2:
+                category = AppConstants.EVERY_TWO_DAYS;
+                break;
+            case 3:
+                category = AppConstants.EVERY_THREE_DAYS;
+                break;
+            case 7:
+                category = AppConstants.EVERY_WEEK;
+                break;
+        }
+        return category;
+    }
 }

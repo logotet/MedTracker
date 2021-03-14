@@ -31,10 +31,10 @@ public class AppConstants {
     public static final int COLOR_GREY = R.color.grey;
 
 
-    public static final int EVERYDAY = 1;
-    public static final int EVERY_TWO_DAYS = 2;
-    public static final int EVERY_THREE_DAYS = 3;
-    public static final int EVERY_WEEK = 7;
+    public static final String EVERYDAY = "Everyday";
+    public static final String EVERY_TWO_DAYS = "Every two days";
+    public static final String EVERY_THREE_DAYS = "Every three days";
+    public static final String EVERY_WEEK = "Every week";
 
     public static final String PROMPT_CATEGORY = "Choose category";
     public static final String PROMPT_INTAKE = "How often will you take it?";
